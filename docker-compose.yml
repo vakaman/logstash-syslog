@@ -4,7 +4,9 @@ services:
   logstash:
     image: logstash:$LOGSTASH_VERSION
     container_name: logstash
+    restart: unless-stopped
     volumes:
       - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+      - /var/log/logstash:/var/log/logstash
     ports:
       - "5514:5514/udp"
