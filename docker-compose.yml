@@ -1,0 +1,10 @@
+version: '3.2'
+
+services:
+  logstash:
+    image: logstash:$LOGSTASH_VERSION
+    container_name: logstash
+    volumes:
+      - ./logstash/pipeline/logstash.conf:/usr/share/logstash/pipeline/logstash.conf
+    ports:
+      - "5514:5514/udp"
