@@ -9,10 +9,26 @@ chmod -R 1000:0 /var/log/logstash
 
 # Up logstash
 docker-compose up -d 
+```
+Mikrotik configuration CGNAT log
 
 ```
+# Configure remote logging server logstash
+/system logging action
+add bsd-syslog=yes remote=IP-LOGSTASH-SERVER remote-port=5514 src-address=CGNAT-IP syslog-facility=syslog
 
-Mikrotik configuration 
+# Active logging script
+/system logging
+add action=remote prefix=CGNAT_LOG topics=info
+
+# Firewal filter in output interface
+/ip firewall filter
+add action=log chain=forward comment=CGNAT_LOG connection-nat-state=srcnat log-prefix=CGNAT_LOG out-interface=OUTPUT-INTERFACE-UPLINK
+```
+
+
+
+Mikrotik configuration Prefix Delegation log
 
 ```
 # Add log_ipv6 on-up
