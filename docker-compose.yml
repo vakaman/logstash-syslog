@@ -10,3 +10,4 @@ services:
       - /var/log/logstash:/var/log/logstash
     ports:
       - "5514:5514/udp"
+      - "5515:5515/udp"
